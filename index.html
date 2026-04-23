@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROOT://GAME_DEV_WORKSHOP_2026</title>
+    <title>ROOT://TERRA_LABS_2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
@@ -25,7 +25,7 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .orbitron {
+        h1, h2, h3, h4, .orbitron {
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -110,6 +110,12 @@
             padding-left: 2rem;
             margin-bottom: 4rem;
         }
+
+        .pointer-item::before {
+            content: ">> ";
+            color: var(--neon-purple);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -122,8 +128,8 @@
                 <h1 class="text-2xl md:text-4xl font-bold tracking-widest text-white">TERRA_LABS</h1>
             </div>
             <div class="text-right hidden md:block">
-                <p class="text-xs opacity-60">LOCATION: TERRA_LABSS</p>
-                <p class="text-xs opacity-60">TIME: <span id="clock">16:49:00</span></p>
+                <p class="text-xs opacity-60">LOCATION: TERRA_GRID_NORTH</p>
+                <p class="text-xs opacity-60">TIME: <span id="clock">00:00:00</span></p>
                 <p class="text-xs text-green-400 mt-1 font-bold"><span class="status-dot mr-2"></span>SYSTEMS_OPERATIONAL</p>
             </div>
         </div>
@@ -140,11 +146,11 @@
                     This isn't a workshop about making assets. It's about the math, the memory, and the mechanics. We go beneath the engine to understand how bits become worlds.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" class="glitch-border px-6 py-3 bg-cyan-500 text-black font-bold hover:bg-white transition-colors duration-300">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="glitch-border px-6 py-3 bg-cyan-500 text-black font-bold hover:bg-white transition-colors duration-300">
                         REGISTER_NOW
                     </a>
-                    <a href="https://github.com" class="glitch-border px-6 py-3 border-cyan-500 text-cyan-400 font-bold hover:bg-cyan-500/10 transition-colors duration-300">
-                        DEMO
+                    <a href="#curriculum" class="glitch-border px-6 py-3 border-cyan-500 text-cyan-400 font-bold hover:bg-cyan-500/10 transition-colors duration-300">
+                        VIEW_MODULES
                     </a>
                 </div>
             </div>
@@ -176,10 +182,66 @@
                 </div>
                 <div class="glitch-border p-6 bg-gradient-to-br from-cyan-950/20 to-purple-950/20">
                     <h3 class="text-white font-bold mb-2">QUICK_START</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Run the following in your terminal to clone the demo game:</p>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Clone the demo repository to review the workshop codebase:</p>
                     <div class="bg-black p-3 rounded border border-cyan-900/50 text-pink-400 text-xs overflow-x-auto whitespace-nowrap">
                         git clone https://github.com/parth-satija/Terra-Labs.github.io.git
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Section -->
+    <div id="details" class="max-w-6xl mx-auto py-12">
+        <div class="glitch-border p-8 bg-black/40 border-slate-800">
+            <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-4">
+                <span class="w-8 h-px bg-purple-500"></span>
+                SYSTEM_SPECIFICATIONS
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <p class="text-slate-300 leading-relaxed">
+                        The Terra Labs Game Dev workshop is a structured immersion into professional game engineering. We prioritize low-level understanding over high-level abstraction, ensuring participants can optimize and scale their own projects within the Godot ecosystem.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 border border-cyan-900/50 bg-cyan-950/10 rounded">
+                            <h4 class="text-xs font-bold text-cyan-500 mb-2">REQUIREMENTS</h4>
+                            <ul class="text-[11px] space-y-1 text-slate-400">
+                                <li class="pointer-item">Basic Logic Proficiency</li>
+                                <li class="pointer-item">Laptop (Win/Mac/Linux)</li>
+                                <li class="pointer-item">Godot 4.x Pre-installed</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 border border-purple-900/50 bg-purple-950/10 rounded">
+                            <h4 class="text-xs font-bold text-purple-500 mb-2">OUTCOMES</h4>
+                            <ul class="text-[11px] space-y-1 text-slate-400">
+                                <li class="pointer-item">Custom Game Framework</li>
+                                <li class="pointer-item">Shader Library</li>
+                                <li class="pointer-item">Portfolio Project</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold text-white mb-2">CORE_TENETS</h4>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-cyan-500 mt-1">▶</span>
+                            <span><strong>Zero-to-Hero Architecture:</strong> Moving from a blank project to a scalable, data-driven game architecture.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cyan-500 mt-1">▶</span>
+                            <span><strong>Mathematical Intuition:</strong> Developing the ability to translate gameplay ideas into vector and matrix operations.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cyan-500 mt-1">▶</span>
+                            <span><strong>Performance First:</strong> Understanding the frame budget, draw calls, and how to stay within the CPU/GPU limits.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-cyan-500 mt-1">▶</span>
+                            <span><strong>Industry Standards:</strong> Utilizing Git, version control, and modular coding practices used in AAA studios.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -195,40 +257,39 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
             <!-- Card 1 -->
-            <div onclick="document.getElementById('module-01').scrollIntoView()" class="module-card glitch-border p-6 border-slate-800">
+            <div onclick="document.getElementById('module-01').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
                 <div class="text-xs text-cyan-500 mb-2">[ 01 ]</div>
-                <h4 class="font-bold text-white mb-3">VECTOR_MATH</h4>
+                <h4 class="font-bold text-white mb-3 text-sm">VECTOR_MATH</h4>
                 <p class="text-xs text-slate-500">The language of movement. Linear algebra fundamentals for 3D space.</p>
             </div>
             <!-- Card 2 -->
-            <div onclick="document.getElementById('module-02').scrollIntoView()" class="module-card glitch-border p-6 border-slate-800">
+            <div onclick="document.getElementById('module-02').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
                 <div class="text-xs text-cyan-500 mb-2">[ 02 ]</div>
-                <h4 class="font-bold text-white mb-3">SHADER_CRAFT</h4>
+                <h4 class="font-bold text-white mb-3 text-sm">SHADER_CRAFT</h4>
                 <p class="text-xs text-slate-500">Writing GLSL to manipulate light, shadow, and vertex data on the GPU.</p>
             </div>
             <!-- Card 3 -->
-            <div onclick="document.getElementById('module-03').scrollIntoView()" class="module-card glitch-border p-6 border-slate-800">
+            <div onclick="document.getElementById('module-03').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
                 <div class="text-xs text-cyan-500 mb-2">[ 03 ]</div>
-                <h4 class="font-bold text-white mb-3">MEMORY_OP</h4>
+                <h4 class="font-bold text-white mb-3 text-sm">MEMORY_OP</h4>
                 <p class="text-xs text-slate-500">Data-oriented design and cache-friendly coding for high performance.</p>
             </div>
             <!-- Card 4 -->
-            <div onclick="document.getElementById('module-04').scrollIntoView()" class="module-card glitch-border p-6 border-slate-800">
+            <div onclick="document.getElementById('module-04').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
                 <div class="text-xs text-cyan-500 mb-2">[ 04 ]</div>
-                <h4 class="font-bold text-white mb-3">PHYSICS_INTEG</h4>
+                <h4 class="font-bold text-white mb-3 text-sm">PHYSICS_INTEG</h4>
                 <p class="text-xs text-slate-500">Collision detection algorithms and rigid body dynamics from scratch.</p>
             </div>
         </div>
 
         <!-- Detailed Module Content -->
         <div class="max-w-4xl mx-auto">
-            
             <!-- Module 01 Content -->
             <section id="module-01" class="content-section">
                 <h3 class="text-2xl font-bold text-white mb-4">01 // VECTOR_ALGEBRA_CORE</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-sm text-slate-400 mb-4">Mastering the spatial relationships that define game worlds. We move beyond simple points to dot products, cross products, and transformation matrices.</p>
+                        <p class="text-sm text-slate-400 mb-4 text-justify">Mastering the spatial relationships that define game worlds. We move beyond simple points to dot products, cross products, and transformation matrices.</p>
                         <ul class="text-xs space-y-2 text-cyan-400 font-bold">
                             <li>> UNIT_VECTORS & NORMALIZATION</li>
                             <li>> DOT_PRODUCT_PROJECTION</li>
@@ -247,7 +308,7 @@
                 <h3 class="text-2xl font-bold text-white mb-4">02 // SHADER_PIPELINE_ARCHITECTURE</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-sm text-slate-400 mb-4">Parallel processing at its finest. Learn to communicate between CPU and GPU via Uniforms, Attributes, and Varyings.</p>
+                        <p class="text-sm text-slate-400 mb-4 text-justify">Parallel processing at its finest. Learn to communicate between CPU and GPU via Uniforms, Attributes, and Varyings.</p>
                         <ul class="text-xs space-y-2 text-cyan-400 font-bold">
                             <li>> VERTEX_DISPLACEMENT_MAPS</li>
                             <li>> PBR_LIGHTING_MODELS</li>
@@ -266,7 +327,7 @@
                 <h3 class="text-2xl font-bold text-white mb-4">03 // MEMORY_MANAGEMENT_STRATEGY</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-sm text-slate-400 mb-4">In game dev, cache is king. We analyze Entity Component Systems (ECS) and how to avoid the "Object-Oriented Trap" that slows down large-scale simulations.</p>
+                        <p class="text-sm text-slate-400 mb-4 text-justify">In game dev, cache is king. We analyze Entity Component Systems (ECS) and how to avoid the "Object-Oriented Trap" that slows down simulations.</p>
                         <ul class="text-xs space-y-2 text-cyan-400 font-bold">
                             <li>> DATA_LOCALITY_PRINCIPLES</li>
                             <li>> MEMORY_POOLING_ALGORITHMS</li>
@@ -285,7 +346,7 @@
                 <h3 class="text-2xl font-bold text-white mb-4">04 // PHYSICS_ENGINE_CONSTRUCTION</h3>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-sm text-slate-400 mb-4">Simulating reality through discrete time steps. We build a GJK collision detection algorithm and handle momentum resolution.</p>
+                        <p class="text-sm text-slate-400 mb-4 text-justify">Simulating reality through discrete time steps. We build a GJK collision detection algorithm and handle momentum resolution.</p>
                         <ul class="text-xs space-y-2 text-cyan-400 font-bold">
                             <li>> VERLET_INTEGRATION</li>
                             <li>> AABB_BROAD_PHASE_DETECTION</li>
@@ -302,11 +363,18 @@
         </div>
     </div>
 
+    <!-- Final CTA -->
+    <div class="max-w-6xl mx-auto mb-20 text-center">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="inline-block glitch-border px-12 py-6 bg-white text-black font-bold text-xl hover:bg-cyan-500 transition-all duration-300">
+            SECURE_YOUR_SLOT
+        </a>
+    </div>
+
     <!-- Footer -->
     <footer class="max-w-6xl mx-auto mt-24 pb-12 text-center">
         <div class="inline-block p-4 border-t border-cyan-900 w-full opacity-40">
             <p class="text-xs tracking-[0.5em] mb-2 uppercase">End of transmission</p>
-            <p class="text-[10px]">&copy; 2026 ENGINE_BUILDER_DOCS // FOR RESEARCH PURPOSES ONLY</p>
+            <p class="text-[10px]">&copy; 2026 TERRA_LABS // BUILT FOR THE NEXT GENERATION OF ARCHITECTS</p>
         </div>
     </footer>
 
