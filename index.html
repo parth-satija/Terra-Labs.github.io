@@ -3,398 +3,357 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROOT://TERRA_LABS_2026</title>
+    <title>Terra Labs | Game Engineering Workshop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
         :root {
-            --neon-cyan: #00f2ff;
-            --neon-purple: #bc13fe;
-            --bg-dark: #050505;
+            --accent: #2563eb;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-light: #f1f5f9;
+            --border-med: #e2e8f0;
         }
 
         html {
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--neon-cyan);
-            font-family: 'Space Mono', monospace;
-            overflow-x: hidden;
+            background-color: #ffffff;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
         }
 
-        h1, h2, h3, h4, .orbitron {
-            font-family: 'Orbitron', sans-serif;
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-card {
+            border-bottom: 1px solid var(--border-med);
+            padding-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .stat-card {
+                border-bottom: none;
+                border-right: 1px solid var(--border-med);
+                padding-bottom: 0;
+                padding-right: 2rem;
+            }
+            .stat-card:last-child {
+                border-right: none;
+            }
+        }
+
+        .module-row {
+            border-top: 1px solid var(--border-med);
+            transition: background-color 0.3s ease;
+        }
+
+        .module-row:hover {
+            background-color: #f8fafc;
+        }
+
+        .btn-main {
+            background-color: var(--text-main);
+            color: white;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-main:hover {
+            background-color: #334155;
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-med);
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background-color: #f8fafc;
+            border-color: var(--text-muted);
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* CRT Scanline Effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 9999;
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-        }
-
-        .glitch-border {
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2), inset 0 0 10px rgba(0, 242, 255, 0.1);
-            position: relative;
-        }
-
-        .glitch-border::after {
-            content: "";
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            border: 1px solid var(--neon-purple);
-            opacity: 0.3;
-            animation: glitch 2s infinite alternate-reverse;
-        }
-
-        @keyframes glitch {
-            0% { clip-path: inset(80% 0 0 0); transform: translate(-2px, 2px); }
-            20% { clip-path: inset(20% 0 50% 0); transform: translate(2px, -2px); }
-            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
-        }
-
-        .terminal-text {
-            border-right: 2px solid var(--neon-cyan);
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
-        }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--neon-cyan) } }
-
-        .module-card {
-            background: rgba(0, 242, 255, 0.03);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .module-card:hover {
-            background: rgba(0, 242, 255, 0.08);
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #00ff00;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #00ff00;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        .content-section {
-            border-left: 1px solid rgba(0, 242, 255, 0.2);
-            padding-left: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .pointer-item::before {
-            content: ">> ";
-            color: var(--neon-purple);
-            font-weight: bold;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
         }
     </style>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L1S70LNNKZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-L1S70LNNKZ');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1S70LNNKZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L1S70LNNKZ');
+    </script>
 </head>
-<body class="p-4 md:p-8">
+<body class="selection:bg-blue-100 selection:text-blue-900">
 
-    <!-- Header / HUD -->
-    <div class="max-w-6xl mx-auto mb-12">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-            <div class="glitch-border p-4 bg-black">
-                <p class="text-xs opacity-70 mb-1 font-bold">[ SYSTEM IDENTIFICATION ]</p>
-                <h1 class="text-2xl md:text-4xl font-bold tracking-widest text-white">TERRA_LABS</h1>
+    <!-- Clean Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 py-5">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="font-bold tracking-tighter text-xl">TERRA LABS</span>
+                <span class="hidden md:block w-px h-4 bg-slate-200"></span>
+                <span class="hidden md:block font-medium text-[11px] text-slate-400 mt-0.5 tracking-wide">SPRING 2026</span>
             </div>
-            <div class="text-right hidden md:block">
-                <p class="text-xs opacity-60">LOCATION: TERRA_LABS</p>
-                <p class="text-xs opacity-60">TIME: <span id="clock">00:00:00</span></p>
-                <p class="text-xs text-green-400 mt-1 font-bold"><span class="status-dot mr-2"></span>SYSTEMS_OPERATIONAL</p>
+            <div class="flex items-center gap-6 text-[11px] text-slate-500 uppercase tracking-widest font-semibold">
+                <a href="#details" class="hover:text-blue-600 transition-colors">Specifications</a>
+                <a href="#curriculum" class="hover:text-blue-600 transition-colors">Curriculum</a>
+                <div class="hidden sm:block font-mono tabular-nums text-slate-400" id="clock">00:00:00</div>
             </div>
         </div>
+    </nav>
 
+    <main class="max-w-7xl mx-auto px-6">
         <!-- Hero Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 glitch-border p-8 bg-black/60 backdrop-blur-sm">
-                <p class="text-purple-400 mb-2 font-bold font-mono">> INITIALIZING WORKSHOP...</p>
-                <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-none">BUILD YOUR <br><span class="text-white bg-cyan-900/30 px-2">DREAM</span></h2>
-                <div class="terminal-text max-w-fit mb-8 text-sm md:text-base">
-                    Building next-gen games. One line at a time
-                </div>
-                <p class="text-slate-400 mb-8 max-w-xl leading-relaxed">
-                    This isn't a workshop about making assets. It's about the math, the memory, and the mechanics. We go beneath the engine to understand how bits become worlds. Join quickly. Workshop starts on May 15th, 2026
-                </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="glitch-border px-6 py-3 bg-cyan-500 text-black font-bold hover:bg-white transition-colors duration-300">
-                        REGISTER_NOW
-                    </a>
-                    <a href="https://parth-satija.itch.io/terra-labs-demo" class="glitch-border px-6 py-3 border-cyan-500 text-cyan-400 font-bold hover:bg-cyan-500/10 transition-colors duration-300">
-                        DEMO_GAME
-                    </a>
-                </div>
-            </div>
-
-            <!-- Side Intel -->
-            <div class="space-y-6">
-                <div class="glitch-border p-6 bg-black">
-                    <h3 class="text-white font-bold mb-4 flex items-center gap-2">
-                        <span class="text-cyan-500">_</span> SESSION_INTEL
-                    </h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between border-b border-cyan-900 pb-2">
-                            <span class="opacity-60 uppercase">Price</span>
-                            <span class="text-purple-400">FREE</span>
+        <section class="py-24 md:py-36">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                <div class="lg:col-span-8">
+                    <h1 class="text-6xl md:text-8xl font-bold tracking-tight text-slate-900 mb-10">
+                        BUILD YOUR <br>
+                        <span class="text-slate-300 font-light italic">DREAM</span>
+                    </h1>
+                    <div class="max-w-xl">
+                        <div class="text-slate-500 mb-8 text-xl font-medium tracking-tight">
+                            Building next-gen games. One line at a time.
                         </div>
-                        <div class="flex justify-between border-b border-cyan-900 pb-2">
-                            <span class="opacity-60 uppercase">Duration</span>
-                            <span class="text-white">4_WEEKS</span>
-                        </div>
-                        <div class="flex justify-between border-b border-cyan-900 pb-2">
-                            <span class="opacity-60 uppercase">Language</span>
-                            <span class="text-white">GDSCRIPT</span>
-                        </div>
-                        <div class="flex justify-between border-b border-cyan-900 pb-2">
-                            <span class="opacity-60 uppercase">Capacity</span>
-                            <span class="text-white">LIMITED_ALPHA</span>
+                        <p class="text-slate-600 text-xl leading-relaxed mb-12">
+                            This isn't a workshop about making assets. It's about the math, the memory, and the mechanics. We go beneath the engine to understand how bits become worlds. Join quickly. Workshop starts on May 15th, 2026.
+                        </p>
+                        <div class="flex flex-wrap gap-5">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="btn-main px-12 py-5 rounded-full font-bold text-sm tracking-widest">
+                                REGISTER NOW
+                            </a>
+                            <a href="https://parth-satija.itch.io/terra-labs-demo" target="_blank" class="btn-outline px-12 py-5 rounded-full font-bold text-sm tracking-widest text-slate-700">
+                                DEMO GAME
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="glitch-border p-6 bg-gradient-to-br from-cyan-950/20 to-purple-950/20">
-                    <h3 class="text-white font-bold mb-2">QUICK_START</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed mb-4">Clone the demo repository to review the workshop codebase:</p>
-                    <div class="bg-black p-3 rounded border border-cyan-900/50 text-pink-400 text-xs overflow-x-auto whitespace-nowrap">
-                        git clone https://github.com/parth-satija/demo.git
+                <div class="lg:col-span-4 flex flex-col justify-end">
+                    <div class="bg-slate-50 p-10 rounded-3xl border border-slate-100">
+                        <span class="section-label mb-6 block">Quick Start</span>
+                        <p class="text-sm text-slate-500 mb-5 font-medium leading-relaxed">Clone the demo repository to review the workshop codebase:</p>
+                        <div class="font-mono text-[12px] bg-white border border-slate-200 p-5 rounded-xl text-blue-600 break-all shadow-sm">
+                            git clone https://github.com/parth-satija/demo.git
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Details Section -->
-    <div id="details" class="max-w-6xl mx-auto py-12">
-        <div class="glitch-border p-8 bg-black/40 border-slate-800">
-            <h2 class="text-2xl font-bold mb-6 text-white flex items-center gap-4">
-                <span class="w-8 h-px bg-purple-500"></span>
-                WORKSHOP_SPECIFICATIONS
-            </h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="space-y-6">
-                    <p class="text-slate-300 leading-relaxed">
-                        The Terra Labs Game Dev workshop is a structured, certified immersion into professional game engineering. We prioritize low-level understanding over high-level abstraction, ensuring participants can optimize and scale their own projects within the Godot ecosystem. We have created a structured syllabus comprising of fun game development concepts, but induced with understanding of how each concept works under the hood. We explain the why, not just the how. No experience required, we accept complete beginners 
+        <!-- Session Intel Grid -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-12 py-20 border-y border-slate-100 mb-32">
+            <div class="stat-card">
+                <span class="section-label">Price</span>
+                <p class="text-3xl font-bold mt-3">FREE</p>
+            </div>
+            <div class="stat-card">
+                <span class="section-label">Duration</span>
+                <p class="text-3xl font-bold mt-3">4 WEEKS</p>
+            </div>
+            <div class="stat-card">
+                <span class="section-label">Language</span>
+                <p class="text-3xl font-bold mt-3">GDSCRIPT</p>
+            </div>
+            <div class="stat-card">
+                <span class="section-label">Capacity</span>
+                <p class="text-3xl font-bold mt-3 text-blue-600">20 SLOTS</p>
+            </div>
+        </section>
+
+        <!-- Specifications -->
+        <section id="details" class="mb-40">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-20">
+                <div class="lg:col-span-5">
+                    <span class="section-label block mb-8">Workshop Specifications</span>
+                    <h2 class="text-4xl font-bold mb-10 tracking-tight">Engineering Intuition.</h2>
+                    <p class="text-slate-500 text-lg leading-relaxed mb-12">
+                        The Terra Labs Game Dev workshop is a structured, certified immersion into professional game engineering. We prioritize low-level understanding over high-level abstraction, ensuring participants can optimize and scale their own projects within the Godot ecosystem. We have created a structured syllabus comprising of fun game development concepts, but induced with understanding of how each concept works under the hood. We explain the why, not just the how. No experience required, we accept complete beginners.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="p-4 border border-cyan-900/50 bg-cyan-950/10 rounded">
-                            <h4 class="text-xs font-bold text-cyan-500 mb-2">REQUIREMENTS</h4>
-                            <ul class="text-[11px] space-y-1 text-slate-400">
-                                <li class="pointer-item">Basic Logic Proficiency</li>
-                                <li class="pointer-item">Laptop (Win/Mac/Linux)</li>
-                                <li class="pointer-item">Godot 4.6 Pre-installed</li>
+                    <div class="grid grid-cols-2 gap-12 pt-10 border-t border-slate-100">
+                        <div>
+                            <span class="section-label block mb-5">Requirements</span>
+                            <ul class="text-sm space-y-4 font-medium text-slate-600">
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span> Basic Logic Proficiency</li>
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span> Laptop (Win/Mac/Linux)</li>
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span> Godot 4.6 Pre-installed</li>
                             </ul>
                         </div>
-                        <div class="p-4 border border-purple-900/50 bg-purple-950/10 rounded">
-                            <h4 class="text-xs font-bold text-purple-500 mb-2">OUTCOMES</h4>
-                            <ul class="text-[11px] space-y-1 text-slate-400">
-                                <li class="pointer-item">Published Game</li>
-                                <li class="pointer-item">Game logic proficiency</li>
-                                <li class="pointer-item">Portfolio Enhancement</li>
+                        <div>
+                            <span class="section-label block mb-5">Outcomes</span>
+                            <ul class="text-sm space-y-4 font-medium text-slate-600">
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Published Game</li>
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Game logic proficiency</li>
+                                <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Portfolio Enhancement</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <h4 class="text-sm font-bold text-white mb-2">CORE_TENETS</h4>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li class="flex items-start gap-3">
-                            <span class="text-cyan-500 mt-1">▶</span>
-                            <span><strong>Zero-to-Hero Architecture:</strong> Moving from a blank project to a scalable, modular and fun game.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-cyan-500 mt-1">▶</span>
-                            <span><strong>Programming Intuition:</strong> Developing the ability to translate gameplay ideas into code.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-cyan-500 mt-1">▶</span>
-                            <span><strong>Performance First:</strong> Understanding the frame budget, draw calls, and how to stay within the CPU/GPU limits.</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-cyan-500 mt-1">▶</span>
-                            <span><strong>Industry Standards:</strong> Utilizing Git, version control, and modular coding practices used in AAA studios.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Curriculum Modules Navigation -->
-    <div id="curriculum" class="max-w-6xl mx-auto py-12">
-        <h2 class="text-2xl font-bold mb-8 flex items-center gap-4">
-            <span class="h-px flex-grow bg-cyan-900"></span>
-            WORKSHOP_MODULES
-            <span class="h-px flex-grow bg-cyan-900"></span>
-        </h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
-            <!-- Card 1 -->
-            <div onclick="document.getElementById('module-01').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
-                <div class="text-xs text-cyan-500 mb-2">[ 01 ]</div>
-                <h4 class="font-bold text-white mb-3 text-sm">GODOT_BASICS</h4>
-                <p class="text-xs text-slate-500">Getting familiar with the Godot editor and node system and character movement</p>
-            </div>
-            <!-- Card 2 -->
-            <div onclick="document.getElementById('module-02').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
-                <div class="text-xs text-cyan-500 mb-2">[ 02 ]</div>
-                <h4 class="font-bold text-white mb-3 text-sm">GAME_DEV_CORE</h4>
-                <p class="text-xs text-slate-500">Understanding collisons, state management, animations, idle motion and sway</p>
-            </div>
-            <!-- Card 3 -->
-            <div onclick="document.getElementById('module-03').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
-                <div class="text-xs text-cyan-500 mb-2">[ 03 ]</div>
-                <h4 class="font-bold text-white mb-3 text-sm">WORLD_GEN</h4>
-                <p class="text-xs text-slate-500">Understanding procedural generation, level design and atmosphere management</p>
-            </div>
-            <!-- Card 4 -->
-            <div onclick="document.getElementById('module-04').scrollIntoView({behavior: 'smooth'})" class="module-card glitch-border p-6 border-slate-800">
-                <div class="text-xs text-cyan-500 mb-2">[ 04 ]</div>
-                <h4 class="font-bold text-white mb-3 text-sm">AI</h4>
-                <p class="text-xs text-slate-500">Understanding pathfinding AI systems and usage of LLMs in game development</p>
-            </div>
-        </div>
-
-        <!-- Detailed Module Content -->
-        <div class="max-w-4xl mx-auto">
-            <!-- Module 01 Content -->
-            <section id="module-01" class="content-section">
-                <h3 class="text-2xl font-bold text-white mb-4">01 // GODOT_BASICS</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-sm text-slate-400 mb-4 text-justify">Getting familiar with the Godot editor, 3D spaces, the Node system, the file system and setting up character movement</p>
-                        <ul class="text-xs space-y-2 text-cyan-400 font-bold">
-                            <li>> GODOT_EDITOR</li>
-                            <li>> NODE_SYSTEM</li>
-                            <li>> CHARACTER_MOVEMENT</li>
-                        </ul>
-                    </div>
-                    <div class="bg-cyan-950/20 p-4 rounded border border-cyan-900/30">
-                        <p class="text-[10px] text-cyan-500 uppercase font-bold mb-2">Technical Objective</p>
-                        <p class="text-xs text-white">Develop basic proficiency with the interface and set up character movement</p>
+                <div class="lg:col-span-7">
+                    <div class="space-y-16">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-16">
+                            <div>
+                                <span class="text-blue-600 font-bold text-sm mb-3 block">01</span>
+                                <h4 class="font-bold text-lg mb-3">Zero-to-Hero Architecture</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Moving from a blank project to a scalable, modular and fun game.</p>
+                            </div>
+                            <div>
+                                <span class="text-blue-600 font-bold text-sm mb-3 block">02</span>
+                                <h4 class="font-bold text-lg mb-3">Programming Intuition</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Developing the ability to translate gameplay ideas into code.</p>
+                            </div>
+                            <div>
+                                <span class="text-blue-600 font-bold text-sm mb-3 block">03</span>
+                                <h4 class="font-bold text-lg mb-3">Performance First</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Understanding the frame budget, draw calls, and how to stay within the CPU/GPU limits.</p>
+                            </div>
+                            <div>
+                                <span class="text-blue-600 font-bold text-sm mb-3 block">04</span>
+                                <h4 class="font-bold text-lg mb-3">Industry Standards</h4>
+                                <p class="text-sm text-slate-500 leading-relaxed">Utilizing Git, version control, and modular coding practices used in AAA studios.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Module 02 Content -->
-            <section id="module-02" class="content-section">
-                <h3 class="text-2xl font-bold text-white mb-4">02 // GAME_DEV_CORE</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-sm text-slate-400 mb-4 text-justify">Using essential game development concepts like state management, collisions, animations, physics expression like movement sway, etc</p>
-                        <ul class="text-xs space-y-2 text-cyan-400 font-bold">
-                            <li>> STATE_MANAGEMENT</li>
-                            <li>> COLLISIONS</li>
-                            <li>> ANIMATIONS</li>
-                        </ul>
-                    </div>
-                    <div class="bg-cyan-950/20 p-4 rounded border border-cyan-900/30">
-                        <p class="text-[10px] text-cyan-500 uppercase font-bold mb-2">Technical Objective</p>
-                        <p class="text-xs text-white"> Get the basics of your game ready and making it modular</p>
+        <!-- Curriculum Modules -->
+        <section id="curriculum" class="mb-40">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <span class="section-label block mb-5">Workshop Curriculum</span>
+                    <h2 class="text-5xl font-bold tracking-tight">Academic Path</h2>
+                </div>
+                <p class="text-[11px] text-slate-400 uppercase tracking-widest font-bold">4 Comprehensive Modules</p>
+            </div>
+
+            <div class="border-b border-slate-100">
+                <!-- Module 01 -->
+                <div id="module-01" class="module-row py-14 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                        <div class="md:col-span-1 font-bold text-sm text-slate-300 group-hover:text-blue-600 transition-colors">01</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">GODOT BASICS</h3>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Core Foundations</p>
+                        </div>
+                        <div class="md:col-span-4">
+                            <p class="text-sm text-slate-500 leading-relaxed">Getting familiar with the Godot editor, 3D spaces, the Node system, the file system and setting up character movement</p>
+                        </div>
+                        <div class="md:col-span-3 flex items-center">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">GODOT EDITOR</span>
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">NODE SYSTEM</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Module 03 Content -->
-            <section id="module-03" class="content-section">
-                <h3 class="text-2xl font-bold text-white mb-4">03 // WORLD_GENERATION</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-sm text-slate-400 mb-4 text-justify">Understanding procedural generation, seeds, level design and path finding</p>
-                        <ul class="text-xs space-y-2 text-cyan-400 font-bold">
-                            <li>> PROCEDURAL_GENERATION</li>
-                            <li>> LEVEL_DESIGN</li>
-                            <li>> PATH_FINDING</li>
-                        </ul>
-                    </div>
-                    <div class="bg-cyan-950/20 p-4 rounded border border-cyan-900/30">
-                        <p class="text-[10px] text-cyan-500 uppercase font-bold mb-2">Technical Objective</p>
-                        <p class="text-xs text-white">Make the beatiful world of your game and add life to it</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Module 04 Content -->
-            <section id="module-04" class="content-section">
-                <h3 class="text-2xl font-bold text-white mb-4">04 // AI_AND_PUBLISHING</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <p class="text-sm text-slate-400 mb-4 text-justify">Usage of AI in game development, adding UI and publishing your unique creation</p>
-                        <ul class="text-xs space-y-2 text-cyan-400 font-bold">
-                            <li>> AI_IN_GAME_DEV</li>
-                            <li>> UI_DESIGN</li>
-                            <li>> PUBLISHING</li>
-                        </ul>
-                    </div>
-                    <div class="bg-cyan-950/20 p-4 rounded border border-cyan-900/30">
-                        <p class="text-[10px] text-cyan-500 uppercase font-bold mb-2">Technical Objective</p>
-                        <p class="text-xs text-white"> Add UI and publish your creation</p>
+                <!-- Module 02 -->
+                <div id="module-02" class="module-row py-14 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                        <div class="md:col-span-1 font-bold text-sm text-slate-300 group-hover:text-blue-600 transition-colors">02</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">GAME DEV CORE</h3>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Logic & Mechanics</p>
+                        </div>
+                        <div class="md:col-span-4">
+                            <p class="text-sm text-slate-500 leading-relaxed">Using essential game development concepts like state management, collisions, animations, physics expression like movement sway, etc</p>
+                        </div>
+                        <div class="md:col-span-3 flex items-center">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">STATE MANAGEMENT</span>
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">PHYSICS</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-        </div>
-    </div>
+                <!-- Module 03 -->
+                <div id="module-03" class="module-row py-14 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                        <div class="md:col-span-1 font-bold text-sm text-slate-300 group-hover:text-blue-600 transition-colors">03</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">WORLD GENERATION</h3>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Environment Engineering</p>
+                        </div>
+                        <div class="md:col-span-4">
+                            <p class="text-sm text-slate-500 leading-relaxed">Understanding procedural generation, seeds, level design and path finding</p>
+                        </div>
+                        <div class="md:col-span-3 flex items-center">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">PROCEDURAL GEN</span>
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">PATHFINDING</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Final CTA -->
-    <div class="max-w-6xl mx-auto mb-20 text-center">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="inline-block glitch-border px-12 py-6 bg-white text-black font-bold text-xl hover:bg-cyan-500 transition-all duration-300">
-            SECURE_YOUR_SLOT
-        </a>
-    </div>
+                <!-- Module 04 -->
+                <div id="module-04" class="module-row py-14 group">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                        <div class="md:col-span-1 font-bold text-sm text-slate-300 group-hover:text-blue-600 transition-colors">04</div>
+                        <div class="md:col-span-4">
+                            <h3 class="text-2xl font-bold mb-2 tracking-tight">AI AND PUBLISHING</h3>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Final Deployment</p>
+                        </div>
+                        <div class="md:col-span-4">
+                            <p class="text-sm text-slate-500 leading-relaxed">Usage of AI in game development, adding UI and publishing your unique creation</p>
+                        </div>
+                        <div class="md:col-span-3 flex items-center">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">AI TOOLS</span>
+                                <span class="px-4 py-1.5 bg-slate-50 border border-slate-100 text-[10px] font-bold rounded-full text-slate-600">DEPLOYMENT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="max-w-6xl mx-auto mt-24 pb-12 text-center">
-        <div class="inline-block p-4 border-t border-cyan-900 w-full opacity-40">
-            <p class="text-xs tracking-[0.5em] mb-2 uppercase">End of transmission</p>
-            <p class="text-[10px]">&copy; For any queries, email at parthsatija@icloud.com</p>
+        <!-- Final CTA -->
+        <section class="py-40 text-center">
+            <h2 class="text-5xl font-bold mb-14 tracking-tight">Admissions Open.</h2>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd1pbDKcKfC3kWvzEJr4IcRjNJHs62MFu7hwrimEVi8mlQTig/viewform?usp=publish-editor" target="_blank" class="btn-main inline-block px-16 py-6 rounded-full font-bold text-lg tracking-widest shadow-2xl shadow-blue-100">
+                SECURE YOUR SLOT
+            </a>
+        </section>
+    </main>
+
+    <!-- Professional Footer -->
+    <footer class="bg-slate-50 border-t border-slate-100 py-24 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="text-center md:text-left">
+                <span class="font-bold tracking-tighter text-2xl block mb-3 text-slate-900">TERRA LABS</span>
+                <p class="text-[11px] text-slate-400 font-bold uppercase tracking-[0.2em]">Game Engineering Laboratory</p>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-sm text-slate-600 font-medium mb-3">Questions? Email <a href="mailto:parthsatija@icloud.com" class="text-blue-600 hover:underline">parthsatija@icloud.com</a></p>
+                <p class="text-[11px] text-slate-400 font-medium">&copy; 2026 Terra Labs Workshop</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Real-time HUD Clock
         function updateClock() {
             const now = new Date();
             const time = now.getHours().toString().padStart(2, '0') + ":" + 
                          now.getMinutes().toString().padStart(2, '0') + ":" + 
                          now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('clock').innerText = time;
+            const clockEl = document.getElementById('clock');
+            if (clockEl) clockEl.innerText = time;
         }
         setInterval(updateClock, 1000);
         updateClock();
